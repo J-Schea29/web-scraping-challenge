@@ -4,10 +4,13 @@ from splinter import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 
+def init_browser():
+    executable_path = { "executable_path": ChromeDriverManager().install()}
+    return Browser("chrome", **executable_path, headless=False)
+
 def scrape():
     
-    executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = init_browser()
     
     #Mars News
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
@@ -58,6 +61,7 @@ def scrape():
                  "mars_table": html_table,
                  "hemispere_images": hemisphere_image_urls
                 }
+    browser.quit()
     return mars_dict
     
     
