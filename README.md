@@ -37,3 +37,7 @@ Finally, I had to get four hemispere images of Mars from [USGS Astrogeology webs
 
 ```
 # Part 2
+I then copied all the code above from my Jupyter notebook and put it in a file call scrape_mars.py. In this file, I defined the fuction called scrape() which when excuted does all the action of the copied code. After this, I created my app.py for my flask aplication and in it imported my function scrape() from scrape_mars.py.
+```python
+import scrape_mars
+```
