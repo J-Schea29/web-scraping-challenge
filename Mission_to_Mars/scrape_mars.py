@@ -14,6 +14,7 @@ def scrape():
     
     #Mars News
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
+
     browser.visit(url)
     html = browser.html
     soup = bs(html, 'html.parser')
@@ -45,19 +46,18 @@ def scrape():
     
     for pic in hem_pics:
         title = pic.find('h3').text
-        partial = pic.find('a', clas_='itemLink product-item')['href']
-        print(title)
-        print(partial)
+        partial = pic.find('a', class_='itemLink product-item')['href']
         browser.visit(f"https://astrogeology.usgs.gov{partial}")
         partial_html = browser.html
         soup = bs(partial_html, 'html.parser')
-        img = soup.find('a', clas_='itemLink product-item')['href']
+        img = soup.find('img', class_='wide-image')['src']
         img_url = f"https://astrogeology.usgs.gov{img}"
+
         hemisphere_image_urls.append({"title" : title, "img_url" : img_url})
     
     mars_dict = {"news_title": news_title,
-                 "news_paragraph": news_p,
-                 "feature_image": feature_image,
+                 "news_p": news_p,
+                 "featured_image": feature_image,
                  "mars_table": html_table,
                  "hemispere_images": hemisphere_image_urls
                 }
