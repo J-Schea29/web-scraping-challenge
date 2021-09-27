@@ -16,32 +16,50 @@
             <h1>Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
         </div>
+    
         <div>
             <h2>Latest Mars News</h2>
             <h3>{{ mars.news_title }}</h3>
             <p>{{ mars.news_p }}</p>
         </div>  
 
-      <div class="row">
-        <div class ="col-md-8">
-            <h1>Featured Image</h1>
-            <img src="{{ mars.featured_image }}" height=auto width=750px>
+        <div class="row">
+            <div class ="col-md-8">
+                <h1>Featured Image</h1>
+                <img src="{{ mars.featured_image }}" height=auto width=750px>
+            </div>
+            <div class ="col-md-4">
+                
+                <div class = "container-fluid">
+                    <h1>Mars Table</h1> 
+                        <table>{{mars.mars_table|safe}}</table> 
+                    
+                </div>    
+            </div>
         </div>
-        <div class ="col-md-4">
-            <div class = "container-fluid">
-                <h1>Mars Table</h1>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">  
-                    <p>{{mars.mars_table | safe}}</p> 
-                </table>
-            </div>    
+        <div class="text-center">
+            <h1 class="jumbotron">Mars Hemispheres</h1>
+            <div>
+                {% for hemispheres in mars.hemispere_images %}
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ hemispheres.img_url }}" height=auto width=500px>
+                            <div class="text-center">
+                                <h4 class="card-title">{{ hemispheres.title }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-      </div>
-      <div class="row">
 
-      </div>
+
+    </div>
 
       
-    </div>
+    
   </body>
   
   </html>
