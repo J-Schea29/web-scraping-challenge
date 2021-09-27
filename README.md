@@ -24,7 +24,7 @@ soup = bs(html, 'html.parser')
 featured = soup.find('img', class_='headerimage fade-in').get('src')
 feature_image = f"https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/{featured}"
 ```
-After that, I used pandas to get the table of mars facts off [Space-Facts website](https://space-facts.com/mars/) and then converted it back to html:
+After that, I used pandas to get the table of Mars facts off [Space-Facts website](https://space-facts.com/mars/) and then converted it back to html:
 ```python
 facts_url = 'https://space-facts.com/mars/'
 tables = pd.read_html(requests.get(facts_url).text)
@@ -32,4 +32,8 @@ mars_df = tables[0]
 mars_df.columns=["Description", "Value"]
 html_table = mars_df.to_html()
 ```
-, and [USGS Astrogeology website](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars).
+Finally, I had to get four hemispere images of Mars from [USGS Astrogeology website](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars):
+```python
+
+```
+#Part 2
