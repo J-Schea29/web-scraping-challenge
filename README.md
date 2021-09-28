@@ -32,12 +32,42 @@ mars_df = tables[0]
 mars_df.columns=["Description", "Value"]
 html_table = mars_df.to_html()
 ```
-Finally, I had to get four hemispere images of Mars from [USGS Astrogeology website](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars):
+Finally, I had to get four hemispere images of Mars from [USGS Astrogeology website](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) using this code:
 ```python
-
+hemisphere_image_urls = []
+hem_pics = soup.find_all('div', class_='item')
+for pic in hem_pics:
+    title = pic.find('h3').text
+    partial = pic.find('a', class_='itemLink product-item')['href']
+    browser.visit(f"https://astrogeology.usgs.gov{partial}")
+    partial_html = browser.html
+    soup = bs(partial_html, 'html.parser')
+    img = soup.find('img', class_='wide-image')['src']
+    img_url = f"https://astrogeology.usgs.gov{img}"
+    hemisphere_image_urls.append({"title" : title, "img_url" : img_url})
 ```
 # Part 2
-I then copied all the code above from my Jupyter notebook and put it in a file call scrape_mars.py. In this file, I defined the fuction called scrape() which when excuted does all the action of the copied code. After this, I created my app.py for my flask aplication and in it imported my function scrape() from scrape_mars.py.
+Next, I copied all the code above from my Jupyter notebook and put it in a file call scrape_mars.py. In this file, I defined the fuction called scrape() which when excuted does all the action of the copied code. After this, I created my app.py for my flask aplication and in it imported my function scrape() from scrape_mars.py.
 ```python
 import scrape_mars
+
+@app.route("/scrape")
+def scrape():
+    
+    mars_dict = scrape_mars.scrape()
+    mongo.db.collection.update({}, mars_dict, upsert=True)
+    return redirect("/")
 ```
+I then went on to create the index.html file which would ultimate become the template for my flask application. Notably, I make sure to put a button on the webpage that allows you to scrape the most recent data.
+```html
+<div class="jumbotron text-center" style="background-image: url('http://2.bp.blogspot.com/-EV6tLYaDZJE/Th6tirHH-uI/AAAAAAAAACY/pis1pJavAVE/s1600/3511_plate_5_copy.jpg'); height:300px">
+  <h1 style="color: red;">Mission to Mars</h1>
+  <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
+```
+I then dispay all data gathered on the webpage.
+![image](https://user-images.githubusercontent.com/84929443/135166772-ab070cd2-8fe6-4fb5-b890-e72e3658d5d8.png)
+![image](https://user-images.githubusercontent.com/84929443/135166876-ee53b2c8-674c-42dc-96d7-78785ec10daa.png)
+![image](https://user-images.githubusercontent.com/84929443/135166917-60dc356a-1813-454e-9954-8d5cff46cdd0.png)
+
+
+
