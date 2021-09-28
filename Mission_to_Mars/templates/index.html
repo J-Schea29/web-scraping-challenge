@@ -12,8 +12,8 @@
 
 <body>
     <div class="container-fluid">
-        <div class="jumbotron text-center">
-            <h1>Mission to Mars</h1>
+        <div class="jumbotron text-center" style="background-image: url('http://2.bp.blogspot.com/-EV6tLYaDZJE/Th6tirHH-uI/AAAAAAAAACY/pis1pJavAVE/s1600/3511_plate_5_copy.jpg'); height:300px">
+            <h1 style="color: red;">Mission to Mars</h1>
             <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
         </div>
     
@@ -30,9 +30,11 @@
             </div>
             <div class ="col-md-4">
                 
-                <div class = "container-fluid">
+                <div class="border">
                     <h1>Mars Table</h1> 
-                        <table>{{mars.mars_table|safe}}</table> 
+                        <table style="width: 65%; height: auto; border: 1px solid black"> 
+                            <td width = "200px" height="300px">{{mars.mars_table|safe}}</td>
+                        </table> 
                     
                 </div>    
             </div>
