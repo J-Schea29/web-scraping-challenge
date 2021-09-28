@@ -64,7 +64,7 @@ I then went on to create the index.html file which would ultimate become the tem
   <h1 style="color: red;">Mission to Mars</h1>
   <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data!</a></p>
 ```
-I then dispay all data gathered on the webpage.
+I then dispayed all data gathered on the webpage.
 ![image](https://user-images.githubusercontent.com/84929443/135166772-ab070cd2-8fe6-4fb5-b890-e72e3658d5d8.png)
 ![image](https://user-images.githubusercontent.com/84929443/135166876-ee53b2c8-674c-42dc-96d7-78785ec10daa.png)
 ![image](https://user-images.githubusercontent.com/84929443/135166917-60dc356a-1813-454e-9954-8d5cff46cdd0.png)
