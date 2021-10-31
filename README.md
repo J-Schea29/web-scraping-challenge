@@ -1,8 +1,23 @@
 # web-scraping-challenge
 
-# Part 1
-For this project, I had to scrape data on Mars from several websites and present it on a webpage using flask (with a button to scrape most recent data). I did this using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter. 
-The first piece of data I needed was the title and descriptive paragraph of the most recnt article on [NASA Mars News website](https://mars.nasa.gov/news/) which I retrieved with the following code: 
+## Table of Contents
+* [Introduction](#introduction)
+* [Setup](#setup)
+* [Deployment](#deployment)
+* [Sources](#sources)
+
+## Introduction
+### Summary
+For this project, I had to scrape data about Mars from several websites and present it on a webpage using flask (with a button to scrape most recent data). I did this using Jupyter Notebook, BeautifulSoup, Pandas, and Requests/Splinter.
+### Requirements
+* Scrape the NASA Mars News Site and collect the latest News Title and Paragraph Text.
+* Use splinter to navigate the JPL site and find the image url for the current Featured Mars Image
+* Visit the Mars Facts webpage here and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
+* Visit the USGS Astrogeology site here to obtain high resolution images for each of Mar’s hemispheres.
+* Use MongoDB with Flask templating to create a new HTML page that displays all of the information that was scraped above.
+
+## Setup
+The first piece of data I needed was the title and descriptive paragraph of the most recent article on [NASA Mars News website](https://mars.nasa.gov/news/) which I retrieved with the following code: 
 ```python
 executable_path = {'executable_path': ChromeDriverManager().install()}
 browser = Browser('chrome', **executable_path, headless=False)
@@ -46,7 +61,8 @@ for pic in hem_pics:
     img_url = f"https://astrogeology.usgs.gov{img}"
     hemisphere_image_urls.append({"title" : title, "img_url" : img_url})
 ```
-# Part 2
+
+## Deployment 
 Next, I copied all the code above from my Jupyter notebook and put it in a file call scrape_mars.py. In this file, I defined the fuction called scrape() which when excuted does all the action of the copied code. After this, I created my app.py for my flask aplication and in it imported my function scrape() from scrape_mars.py.
 ```python
 import scrape_mars
@@ -69,5 +85,12 @@ I then dispayed all data gathered on the webpage.
 ![image](https://user-images.githubusercontent.com/84929443/135166876-ee53b2c8-674c-42dc-96d7-78785ec10daa.png)
 ![image](https://user-images.githubusercontent.com/84929443/135166917-60dc356a-1813-454e-9954-8d5cff46cdd0.png)
 
+## Sources
+[NASA Mars News website](https://mars.nasa.gov/news/)
 
+<https://data-class-jpl-space.s3.amazonaws.com/JPL_Space/index.html>
+
+[Space-Facts website](https://space-facts.com/mars/)
+
+[USGS Astrogeology website](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars)
 
